@@ -5,7 +5,8 @@ import os
 
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEYS")
-
+ALGORITHM = os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTE = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTE"))
 app = FastAPI()
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
