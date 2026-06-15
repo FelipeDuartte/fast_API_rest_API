@@ -30,14 +30,14 @@ class Pedido(Base):
     # nome da tabela
     __tablename__ = "pedidos"
     # valores padrao que tem que ter na tabela de pedidos
-    STATUS_PEDIDO = [
-        ("PENDENTE", "PENDENTE"),
-        ("CANCELADO", "CANCELADO"),
-        ("CONCLUIDO", "CONCLUIDO")
-    ]
+    # STATUS_PEDIDO = [
+    #     ("PENDENTE", "PENDENTE"),
+    #     ("CANCELADO", "CANCELADO"),
+    #     ("CONCLUIDO", "CONCLUIDO")
+    # ]
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    status = Column("status", String, ChoiceType(STATUS_PEDIDO), default="PENDENTE")
+    status = Column("status", String)
     preco = Column("preco", Float)
     usuario_id = Column("usuario_id", Integer, ForeignKey("usuarios.id"))
     # oque tenho que passar para criar um pedido

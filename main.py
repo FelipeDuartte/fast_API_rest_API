@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from passlib.context import CryptContext
+from fastapi.security import OAuth2PasswordBearer
 import os
 
 load_dotenv()
@@ -10,6 +11,7 @@ ACCESS_TOKEN_EXPIRE_MINUTE = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTE"))
 app = FastAPI()
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="auth/login-form")
 
 from auth_router import auth_routers
 from order_router import order_routers
