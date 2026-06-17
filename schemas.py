@@ -25,3 +25,10 @@ class SchemaLogin(BaseModel):
 
     class Config:
         from_attributes= True
+
+class SchemaItemPedido(BaseModel):
+    quantidade: int
+    sabor: str
+    tamanho: str
+    preco_unitario: float
+    pedido_id: int

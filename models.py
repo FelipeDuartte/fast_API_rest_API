@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine, String, Integer, Boolean, Float, Column, ForeignKey
-from sqlalchemy.orm import declarative_base
-from sqlalchemy_utils.types import ChoiceType
+from sqlalchemy.orm import declarative_base, relationship
 # criar a conexao com o banco de dados
 db = create_engine("sqlite:///banco.db")
 # criar a base de dados
@@ -40,11 +39,19 @@ class Pedido(Base):
     status = Column("status", String)
     preco = Column("preco", Float)
     usuario_id = Column("usuario_id", Integer, ForeignKey("usuarios.id"))
+    itens = relationship("ItensPedido", cascade="all, delete")
     # oque tenho que passar para criar um pedido
     def __init__(self, usuario_id, status="PENDENTE", preco=0.0):
         self.status = status
         self.preco = preco
         self.usuario_id = usuario_id
+
+    def calcular_preco(self):
+        preco_pedido = 0
+        for item in self.itens:
+            preco_item = item.quantidade * item.preco_unitario
+            preco_pedido += preco_item
+        self.preco = preco_pedido
 
 class ItensPedido(Base):
     __tablename__ = "itens_pedido"
